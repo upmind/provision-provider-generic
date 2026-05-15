@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Upmind\ProvisionProviders\Generic\RPC;
+namespace Upmind\ProvisionProviders\Generic\Providers\RPC;
 
 use Upmind\ProvisionBase\Provider\DataSet\DataSet;
 use Upmind\ProvisionBase\Provider\DataSet\Rules;

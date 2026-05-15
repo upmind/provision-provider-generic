@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Upmind\ProvisionProviders\Generic\RPC;
+namespace Upmind\ProvisionProviders\Generic\Providers\RPC;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -195,7 +194,7 @@ class Provider extends Category implements ProviderInterface
     /**
      * Get the full URL for an RPC action by appending the action name to the base URL path.
      */
-    private function getRpcUrl(string $action): string
+    public function getRpcUrl(string $action): string
     {
         $parts = parse_url($this->configuration->base_url);
 
@@ -219,7 +218,7 @@ class Provider extends Category implements ProviderInterface
      *
      * @return string Formed url
      */
-    private function buildUrl(
+    public function buildUrl(
         array $parts,
         array $whitelist = ['scheme', 'user', 'pass', 'host', 'port', 'path', 'query', 'fragment']
     ): string {
@@ -240,7 +239,7 @@ class Provider extends Category implements ProviderInterface
     /**
      * Get a Guzzle HTTP client instance.
      */
-    private function http(): Client
+    public function http(): Client
     {
         if (isset($this->client)) {
             return $this->client;
@@ -268,7 +267,7 @@ class Provider extends Category implements ProviderInterface
      *
      * @throws ProvisionFunctionError If response cannot be parsed or otherwise indicates an error
      */
-    private function parseResponse(ResponseInterface $response): array
+    public function parseResponse(ResponseInterface $response): array
     {
         $httpCode = $response->getStatusCode();
         $body = (string) $response->getBody();
@@ -308,7 +307,7 @@ class Provider extends Category implements ProviderInterface
      *
      * @throws ProvisionFunctionError
      */
-    private function handleTransferException(TransferException $e): void
+    public function handleTransferException(TransferException $e): void
     {
         if ($e instanceof RequestException && $response = $e->getResponse()) {
             $data = $this->parseResponse($response);
