@@ -261,6 +261,14 @@ class Provider extends Category implements ProviderInterface
     }
 
     /**
+     * Set the Guzzle HTTP client instance (primarily for testing/mocking purposes).
+     */
+    public function setHttp(Client $client): void
+    {
+        $this->client = $client;
+    }
+
+    /**
      * Return the API response data as an assoc array.
      *
      * @return array<string,mixed>|no-return

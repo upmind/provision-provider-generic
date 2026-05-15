@@ -138,7 +138,7 @@ class ProviderTest extends TestCase
                 'data' => ['service_id' => 'svc_1'],
             ], JSON_THROW_ON_ERROR)));
 
-        $this->injectClient($provider, $mockClient);
+        $provider->setHttp($mockClient);
 
         $result = $provider->create($params);
         $result->autoValidation(false);
@@ -197,12 +197,5 @@ class ProviderTest extends TestCase
         $configuration->autoValidation(false);
 
         return new Provider($configuration);
-    }
-
-    private function injectClient(Provider $provider, Client $client): void
-    {
-        $property = new ReflectionProperty($provider, 'client');
-        $property->setAccessible(true);
-        $property->setValue($provider, $client);
     }
 }
