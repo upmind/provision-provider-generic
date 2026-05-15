@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Upmind\ProvisionProviders\Generic;
 
 use Upmind\ProvisionBase\Laravel\ProvisionServiceProvider;
-use Upmind\ProvisionProviders\Generic\RPC\Provider as RpcProvider;
+use Upmind\ProvisionProviders\Generic\Providers\RPC\Provider as RpcProvider;
 
 class LaravelServiceProvider extends ProvisionServiceProvider
 {
