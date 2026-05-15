@@ -58,8 +58,12 @@ class ProviderTest extends TestCase
         $clientB = $provider->http();
 
         self::assertSame($clientA, $clientB);
-        self::assertSame('Bearer abc', $clientA->getConfig('headers')['Authorization']);
-        self::assertFalse($clientA->getConfig('verify'));
+
+        /** @var array $config */
+        $config = \Closure::bind(fn () => $this->config, $clientA, Client::class)();
+
+        self::assertSame('Bearer abc', $config['headers']['Authorization']);
+        self::assertFalse($config['verify']);
     }
 
     public function testParseResponseReturnsDecodedDataWhenSuccessful(): void
