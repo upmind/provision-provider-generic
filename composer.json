@@ -1,5 +1,5 @@
 {
-    "name": "upmind/provision-providers-generic",
+    "name": "upmind/provision-provider-generic",
     "description": "This provision category contains common functions which should cover the lifecycle of the majority of provisionable online services. Ships with a custom function definition which can be used for additional flexibility.",
     "type": "library",
     "require": {
