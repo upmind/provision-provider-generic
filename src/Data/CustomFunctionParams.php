@@ -13,7 +13,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read string $service_id Internal service identifier
  * @property-read string|null $service_identifier Human-readable service identifier
  * @property-read string $function Function name
- * @property-read array|null $extra Any additional values required for the custom function
+ * @property-read array<string,mixed>|null $extra Any additional values required for the custom function
  */
 class CustomFunctionParams extends DataSet
 {

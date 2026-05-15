@@ -13,7 +13,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read string $service_id Unique service id
  * @property-read string|null $service_identifier Human-readable service identifier
  * @property-read string|null $service_status Current service status if available
- * @property-read array|null $extra Any additional values returned by the provider
+ * @property-read array<string,mixed>|null $extra Any additional values returned by the provider
  */
 class ServiceInfo extends ResultData
 {

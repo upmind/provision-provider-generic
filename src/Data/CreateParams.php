@@ -14,7 +14,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read string $customer_email Billing system customer email to associate the new service with
  * @property-read string|null $service_identifier Human-readable service identifier e.g., a domain name
  * @property-read string $package_identifier Package or plan identifier to create the service with
- * @property-read array|null $extra Any additional values required for create
+ * @property-read array<string,mixed>|null $extra Any additional values required for create
  */
 class CreateParams extends DataSet
 {

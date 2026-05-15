@@ -12,7 +12,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  *
  * @property-read string $service_id Internal service identifier
  * @property-read string|null $service_identifier Human-readable service identifier
- * @property-read array|null $extra Any additional values required
+ * @property-read array<string,mixed>|null $extra Any additional values required
  */
 class ServiceIdentifierParams extends DataSet
 {

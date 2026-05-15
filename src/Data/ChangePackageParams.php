@@ -12,7 +12,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read string $service_id Unique service id
  * @property-read string|null $service_identifier Human-readable service identifier
  * @property-read string $package_identifier New package or plan identifier to change the service to
- * @property-read array|null $extra Any additional values required for change package
+ * @property-read array<string,mixed>|null $extra Any additional values required for change package
  */
 class ChangePackageParams extends ServiceIdentifierParams
 {

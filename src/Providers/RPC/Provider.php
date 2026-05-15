@@ -9,6 +9,8 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Str;
+use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 use Upmind\ProvisionBase\Exception\ProvisionFunctionError;
 use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
@@ -196,6 +198,11 @@ class Provider extends Category implements ProviderInterface
     private function getRpcUrl(string $action): string
     {
         $parts = parse_url($this->configuration->base_url);
+
+        if (!is_array($parts)) {
+            throw new RuntimeException('Failed to parse base URL');
+        }
+
         $parts['path'] = rtrim($parts['path'] ?? '', '/') . '/' . $action;
 
         return $this->buildUrl($parts);
@@ -204,8 +211,9 @@ class Provider extends Category implements ProviderInterface
     /**
      * Build a URL from an array of URL fragments.
      *
-     * @param string[] $parts Fragments of a URL as returned from SPL function parse_url(), which can include any or all
-     * of: `scheme`, `user`, `pass`, `host`, `port`, `path`, `query`, `fragment`.
+     * @param array<string,mixed> $parts Fragments of a URL as returned from SPL function parse_url(), which can
+     * include any or all of: `scheme`, `user`, `pass`, `host`, `port`, `path`, `query`, `fragment`.
+     * @param array<int,string> $whitelist List of URL parts to include in the final URL, defaulting to all valid parts.
      *
      * @link https://www.php.net/manual/en/function.parse-url.php#refsect1-function.parse-url-returnvalues
      *
@@ -256,11 +264,11 @@ class Provider extends Category implements ProviderInterface
     /**
      * Return the API response data as an assoc array.
      *
-     * @return array|no-return
+     * @return array<string,mixed>|no-return
      *
      * @throws ProvisionFunctionError If response cannot be parsed or otherwise indicates an error
      */
-    private function parseResponse(Response $response): array
+    private function parseResponse(ResponseInterface $response): array
     {
         $httpCode = $response->getStatusCode();
         $body = (string) $response->getBody();

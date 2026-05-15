@@ -9,6 +9,9 @@ use Upmind\ProvisionProviders\Generic\RPC\Provider as RpcProvider;
 
 class LaravelServiceProvider extends ProvisionServiceProvider
 {
+    /**
+     * @return void
+     */
     public function boot()
     {
         $this->bindCategory('generic', Category::class);
