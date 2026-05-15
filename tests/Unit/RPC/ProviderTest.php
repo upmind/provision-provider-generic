@@ -15,6 +15,7 @@ use Illuminate\Translation\ArrayLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\Factory as ValidationFactory;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use ReflectionProperty;
 use Upmind\ProvisionBase\Exception\ProvisionFunctionError;
 use Upmind\ProvisionProviders\Generic\Data\CreateParams;
@@ -196,6 +197,9 @@ class ProviderTest extends TestCase
         ], $overrides));
         $configuration->autoValidation(false);
 
-        return new Provider($configuration);
+        $provider = new Provider($configuration);
+        $provider->setLogger(new NullLogger());
+
+        return $provider;
     }
 }
